@@ -1,0 +1,21 @@
+ai-ronin/
+├── index.html
+├── script.js       ← (if separate from HTML)
+├── style.css       ← (optional if using Tailwind CDN)
+├── .gitignore
+├── LICENSE         ← (MIT or Apache 2.0)
+└── README.md       ← (Optional but good!)
+ai-ronin-java/
+├── src/
+│   └── Main.java
+├── .gitignore
+├── LICENSE
+├── README.md
+└── pom.xml         ← if using Maven
+cd path/to/your/ai-ronin
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin https://github.com/YOUR_USERNAME/ai-ronin.git
+git push -u origin main
