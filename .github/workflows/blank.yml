@@ -1,21 +1,36 @@
-ai-ronin/
-├── index.html
-├── script.js       ← (if separate from HTML)
-├── style.css       ← (optional if using Tailwind CDN)
-├── .gitignore
-├── LICENSE         ← (MIT or Apache 2.0)
-└── README.md       ← (Optional but good!)
-ai-ronin-java/
-├── src/
-│   └── Main.java
-├── .gitignore
-├── LICENSE
-├── README.md
-└── pom.xml         ← if using Maven
-cd path/to/your/ai-ronin
-git init
-git add .
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/ai-ronin.git
-git push -u origin main
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload static content
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: .
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
